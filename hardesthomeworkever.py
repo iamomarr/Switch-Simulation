@@ -1,6 +1,6 @@
 #omar abuali 11923947
 #amr shekha 11923707
-#------------there is two defferent codes inside the file---------
+#------------there is two defferent codes inside the file bcz idont know wich one of them is more correct---------
 
 import random
 import threading
@@ -10,13 +10,13 @@ from threading import Lock, Condition
 import time
 import numpy as np
 
-buffer_size = 6
+buffer_size = 6 #size how much buffer must contan items insid
 buffer = [-1 for i in range(buffer_size)]
 in_buffer = 0
 out_buffer = 0
 mutex = threading.Semaphore()
-full = threading.Semaphore(buffer_size)
-empty = threading.Semaphore(0)
+full = threading.Semaphore(buffer_size) #if its full
+empty = threading.Semaphore(0) #if its empty
 
 
 def mean():
@@ -74,7 +74,7 @@ with condition:
         t.start()
         print(f"{t.name} number {i} created")
         condition.wait()
-#--------------------------from here start the second solution we dont know wich one is True------------------------
+#--------------------------from here start the second solution we dont know Which of them is more correct------------------------
 
 global mlist
 global slist
@@ -90,7 +90,7 @@ def switchmain(lock):
     global slist, mlistm, size
     mlist = [1, 2, 3, 4, 5]
     slist = []
-
+#here we definde a lists forr the switchs and buffer,with loop to insert numbers and print the array after every update 
     while True:
             for x in range(size):
                 if int(x) in mlist:
@@ -98,7 +98,7 @@ def switchmain(lock):
                     slist.insert(x, x)
                     print("after add the number =" ,slist)
                     time.sleep(0.5)
-                    if len(slist) == 5:
+                    if len(slist) == 5: #if the array is full  delete x number from inisd the array
                         slist.remove(x)
                         print("after delete random nubmer : " ,slist)
                         time.sleep(0.9)
@@ -109,8 +109,9 @@ def switchmain(lock):
 lock = Lock()
 condition = Condition()
 with condition:
-    for i in range(5):
+    for i in range(5): #make five threads
         s = threading.Thread(target=switchmain, args=(lock,))
         s.start()
         s.join()
         condition.wait()
+Footer
